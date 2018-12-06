@@ -32,7 +32,7 @@ RUN dpkg --add-architecture i386 && apt update -qq > /dev/null && \
 	apt install -qq --yes --no-install-recommends \
 	build-essential ccache git libncurses5:i386 libstdc++6:i386 libgtk2.0-0:i386 \
 	libpangox-1.0-0:i386 libpangoxft-1.0-0:i386 libidn11:i386 python2.7 \
-	python2.7-dev openjdk-8-jdk unzip zlib1g-dev zlib1g:i386
+	python2.7-dev openjdk-8-jdk unzip zlib1g-dev zlib1g:i386 python3 python3-dev
 
 # prepares non root env
 RUN useradd --create-home --shell /bin/bash ${USER}
@@ -44,7 +44,9 @@ USER ${USER}
 WORKDIR ${WORK_DIR}
 
 # installs buildozer and dependencies
-RUN pip install --user Cython==0.25.2 buildozer
+RUN pip install --user Cython==0.28.6 buildozer
+RUN pip install --user sh
+
 # calling buildozer adb command should trigger SDK/NDK first install and update
 # but it requires a buildozer.spec file
 RUN cd /tmp/ && buildozer init && buildozer android adb -- version && cd -
