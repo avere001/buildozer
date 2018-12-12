@@ -51,7 +51,7 @@ RUN pip install --user sh
 # but it requires a buildozer.spec file
 RUN cd /tmp/ && buildozer init && buildozer android adb -- version && cd -
 # fixes source and target JDK version, refs https://github.com/kivy/buildozer/issues/625
-RUN sed s/'name="java.source" value="1.5"'/'name="java.source" value="7"'/ -i ${HOME_DIR}/.buildozer/android/platform/android-sdk-20/tools/ant/build.xml
-RUN sed s/'name="java.target" value="1.5"'/'name="java.target" value="7"'/ -i ${HOME_DIR}/.buildozer/android/platform/android-sdk-20/tools/ant/build.xml
+# RUN sed s/'name="java.source" value="1.5"'/'name="java.source" value="7"'/ -i ${HOME_DIR}/.buildozer/android/platform/android-sdk-20/tools/ant/build.xml
+# RUN sed s/'name="java.target" value="1.5"'/'name="java.target" value="7"'/ -i ${HOME_DIR}/.buildozer/android/platform/android-sdk-20/tools/ant/build.xml
 
 ENTRYPOINT ["buildozer"]
